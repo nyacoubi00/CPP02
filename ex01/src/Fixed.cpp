@@ -1,39 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nyacoubi <nyacoubi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/19 10:56:33 by nyacoubi          #+#    #+#             */
+/*   Updated: 2024/12/19 14:56:44 by nyacoubi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/Fixed.hpp"
 
 Fixed::Fixed()
 {
-	_value = 0;
 	std::cout << "Default constructor called" << std::endl;
+	_value = 0;
 }
 
-Fixed::Fixed(const int value)
-{
-	_value = value << _fractionalBits;
-	std::cout << "Int constructor called" << std::endl;
-}
-
-Fixed::Fixed(const float value)
-{
-	_value = roundf(value * (1 << _fractionalBits));
-	std::cout << "Float constructor called" << std::endl;
-}
-
-Fixed::Fixed(const Fixed &fixed)
+Fixed::Fixed(const Fixed &tocopy)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	*this = fixed;
+	*this = tocopy;
 }
 
 Fixed::~Fixed()
-{
+{	
 	std::cout << "Destructor called" << std::endl;
 }
 
-Fixed &Fixed::operator=(const Fixed &fixed)
+Fixed &Fixed::operator=(const Fixed& tocopy)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	_value = fixed.getRawBits();
-	return (*this);
+	if (this != &tocopy)
+		_value = tocopy.getRawBits();
+	return *this;
 }
 
 int Fixed::getRawBits(void) const
@@ -46,14 +47,26 @@ void Fixed::setRawBits(int const raw)
 	_value = raw;
 }
 
-float Fixed::toFloat(void) const
+Fixed::Fixed(const int val)
 {
-	return ((float)_value / (1 << _fractionalBits));
+	std::cout << "Int constructor called" << std::endl;
+	_value = val << _FractionalBits;
 }
 
-int Fixed::toInt(void) const
+Fixed::Fixed(const float val)
 {
-	return (_value >> _fractionalBits);
+	std::cout << "Float constructor called" << std::endl;
+	_value = roundf(val * (1 << 8));
+}
+
+float Fixed::toFloat(void) const
+{
+	return ((float)_value / (1 << 8));
+}
+
+int	Fixed::toInt(void) const
+{
+	return (_value >> _FractionalBits);	
 }
 
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
