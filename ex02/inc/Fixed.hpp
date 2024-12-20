@@ -6,7 +6,7 @@
 /*   By: nyacoubi <nyacoubi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:38:22 by nyacoubi          #+#    #+#             */
-/*   Updated: 2024/12/19 15:12:43 by nyacoubi         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:53:30 by nyacoubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,16 @@ class	Fixed
 		bool operator<=(const Fixed &dst);
 		
 		Fixed &operator=(const Fixed& tocopy);
-		Fixed &operator+(const Fixed &dst);
-		Fixed &operator-(const Fixed &dst);
-		Fixed &operator*(const Fixed &dst);
-		Fixed &operator/(const Fixed &dst);
-		Fixed &operator++();
-		Fixed &operator--();
+		Fixed operator+(const Fixed &dst);
+		Fixed operator-(const Fixed &dst);
+		Fixed operator*(const Fixed &dst);
+		Fixed operator/(const Fixed &dst);
+		Fixed operator++();
+		Fixed operator--();
 		Fixed operator++(int);
 		Fixed operator--(int);
+
+		
 
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);

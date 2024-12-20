@@ -6,7 +6,7 @@
 /*   By: nyacoubi <nyacoubi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:56:33 by nyacoubi          #+#    #+#             */
-/*   Updated: 2024/12/19 15:14:59 by nyacoubi         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:53:02 by nyacoubi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,60 @@ bool Fixed::operator<=(const Fixed &dst)
 	return (this->_value >= dst._value);
 }
 
-Fixed &Fixed::operator+(const Fixed &dst)
+Fixed Fixed::operator+(const Fixed &dst)
 {
-	return (this->toFloat() + dst.toFloat());	
+	Fixed result;
+	result._value = this->_value + dst._value;
+	return (result);
+}
+
+Fixed Fixed::operator-(const Fixed &dst)
+{
+	Fixed result;
+	result._value = this->_value - dst._value;
+	return (result);
+}
+
+Fixed Fixed::operator*(const Fixed &dst)
+{
+	Fixed result;
+	result._value = this->_value * dst._value;
+	return (result);
+}
+
+Fixed Fixed::operator/(const Fixed &dst)
+{
+	Fixed result;
+	result._value = this->_value / dst._value;
+	return (result);
+}
+
+Fixed Fixed::operator++()
+{
+	Fixed result;
+	result._value = this->_value + 1;
+	return (result);
+}
+
+Fixed Fixed::operator--()
+{
+	Fixed result;
+	result._value = this->_value - 1;
+	return (result);
+}
+
+Fixed Fixed::operator++(int)
+{
+	Fixed result;
+	result._value = this->_value;
+	this->_value++;
+	return (result);
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed result;
+	result._value = this->_value;
+	this->_value--;
+	return (result);
 }
